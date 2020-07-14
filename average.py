@@ -12,16 +12,26 @@ def get_grades():
         grade = input('enter a grade(enter "done" to stop):')
         if grade == "done":
             break
-        numeric_grade = float(grade)
+        try:
+            numeric_grade = float(grade)
+        except ValueError:
+            print("not a number!")
+            continue
+        if numeric_grade > 100 or numeric_grade < 0:
+            print("Invalid Grade!")
+            continue
         result.append(numeric_grade)
     return result
 
 
 grades = get_grades()
 number_of_grades = len(grades)
-total = 0
-average = ''
-for grade in grades:
-    total = total + grade
-average = total // number_of_grades
-print(average, 'was the average grade')
+if number_of_grades:
+    total = 0
+    average = ''
+    for grade in grades:
+        total = total + grade
+    average = total // number_of_grades
+    print(average, 'was the average grade')
+else:
+    print('nothing to do!.')
